@@ -1,23 +1,27 @@
 <template>
-  <div>
-    hello world
-  </div>
+  <v-app>
+    <v-main>
+      <TableSearch/>
+      <HelloWorld/>
+    </v-main>
+  </v-app>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+import TableSearch from './components/TableSearch.vue'
 
-export default defineComponent({
-  name: "App",
-});
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+export default {
+  name: 'App',
+
+  components: {
+    HelloWorld,
+    TableSearch
+  },
+
+  data: () => ({
+    //
+  }),
 }
-</style>
+</script>
