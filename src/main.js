@@ -17,18 +17,18 @@ const store = createStore({
     updateQueryString(state, string) {
       state.searchQuery = string
     },
-    deleteRow(state, id) {
+    deleteRow(state, idx) {
       state.table.forEach((row, index) => {
-        if (row.id == id) {
+        if ( index == idx) {
           state.table.splice(index, 1)
         }
       });
     },
     updateRow(state, params) {
       console.log(params)
-      const { id, key, text } = params
-      state.table.forEach( (row) => {
-        if (row.id === id) {
+      const { ind, key, text } = params
+      state.table.forEach( (row, index) => {
+        if (index === ind) {
           row[key] = text
         }
       })

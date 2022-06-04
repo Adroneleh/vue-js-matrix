@@ -56,24 +56,18 @@ export default {
                     let data = XLSX.utils.sheet_to_json(ws, { header: 1 }).filter(e => e.length !== 0)
 
                     const tableHeader = data[0]
-                    const hasIdProperty = tableHeader.find(e => e.toLowerCase() === 'id') ? true : false
-
-                    if (!hasIdProperty) tableHeader.push('id')
 
                     this.$store.commit('updateTableHeader', Object.assign({}, tableHeader))
 
                     data.splice(0, 1)
 
 
-                    data = data.map((row, index) => {
+                    data = data.map((row) => {
                         let result = {}
 
                         tableHeader.forEach((element, index) => {
                             result[element.toString()] = row[index]
                         });
-                        if (!hasIdProperty) {
-                            result['id'] = index
-                        }
                         return result
                     })
 
