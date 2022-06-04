@@ -20,8 +20,10 @@
           />
         </td>
         <td>
-           <v-btn color="success" class="mr-4" @click="deleteRow(index)">Delete</v-btn>
-            <v-btn color="success" class="mr-4" @click="getQuery">Copy</v-btn>
+          <v-btn color="success" class="mr-4" @click="deleteRow(index)"
+            >Delete</v-btn
+          >
+          <v-btn color="success" class="mr-4" @click="getQuery">Copy</v-btn>
         </td>
       </tr>
     </tbody>
@@ -29,8 +31,6 @@
 </template>
 
 <script>
-import * as XLSX from "xlsx";
-
 export default {
   data() {
     return {
@@ -38,14 +38,6 @@ export default {
       tableHeader: this.$store.state.tableHeader,
     };
   },
-  // watch: {
-  //   '$store.state.table': {
-  //     handler() {
-  //       console.log(this.$store.state.table)
-  //     },
-  //     immediate: true
-  //   }
-  // },
   methods: {
     deleteRow(id) {
       this.$store.commit("deleteRow", id);
@@ -53,13 +45,6 @@ export default {
     updateCell(id, key, text, item) {
       console.log(item);
       this.$store.commit("updateRow", { id, key, text });
-    },
-    exportFile() {
-      const data = XLSX.utils.json_to_sheet(this.tableData);
-      console.log(data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, data, "data");
-      XLSX.writeFile(wb, "demo.xlsx");
     },
   },
   computed: {
