@@ -5,6 +5,9 @@
         <th class="text-left" v-for="value in tableHeader" :key="value">
           {{ value }}
         </th>
+        <th v-if="Object.values(tableHeader).length > 0">
+          <v-btn color="success" class="mr-4" @click="addEmptyRow">Add</v-btn>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -50,6 +53,9 @@ export default {
     copyRow(idx) {
       this.$store.commit("copyRow", idx);
     },
+    addEmptyRow() {
+      this.$store.commit("addEmptyRow")
+    }
   },
   watch: {
     "$store.state.tableHeader": {

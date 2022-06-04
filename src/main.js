@@ -40,7 +40,18 @@ const store = createStore({
       state.tableHeader = data;
     },
     copyRow(state, idx) {
-      state.table.push(state.table[idx])
+      state.table.push(state.table[idx]);
+    },
+    addEmptyRow(state) {
+      if (state.table.length > 0) {
+        const emptyRow = { ...state.tableHeader };
+        for (let key in emptyRow) {
+          emptyRow[key] = "";
+        }
+        state.table.push(emptyRow);
+      } else {
+        state.table.push({});
+      }
     },
   },
 });
