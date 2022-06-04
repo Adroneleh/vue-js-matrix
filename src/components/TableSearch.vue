@@ -5,8 +5,8 @@
       label="Search"
       variant="contained"
       placeholder="Table search"
+      @input="getQuery"
     ></v-text-field>
-    <v-btn color="success" class="mr-4" @click="getQuery">Search</v-btn>
 </template>
 
 <script>
