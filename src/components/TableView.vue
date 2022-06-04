@@ -51,6 +51,14 @@ export default {
       this.$store.commit("copyRow", idx);
     },
   },
+  watch: {
+    "$store.state.tableHeader": {
+      handler() {
+        this.tableHeader = this.$store.state.tableHeader;
+      },
+      immediate: true,
+    },
+  },
   computed: {
     filteredTable() {
       return this.$store.state.table.filter((row) =>

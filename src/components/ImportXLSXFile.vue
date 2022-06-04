@@ -72,8 +72,6 @@ export default {
                     })
 
                     this.$store.commit('uploadDataFromFile', data)
-                    console.log(tableHeader)
-                    console.log(data)
                 }
 
                 reader.readAsBinaryString(this.file);
