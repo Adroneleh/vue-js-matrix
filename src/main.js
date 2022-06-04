@@ -6,51 +6,38 @@ import { loadFonts } from './plugins/webfontloader'
 import { createStore } from 'vuex'
 
 const store = createStore({
-  state () {
+  state() {
     return {
       searchQuery: '',
-      table: [
-        {
-          count: 10,
-          name: 'Art',
-          address: 'Lenin street',
-          emailAddress: 'exampleSobakasite.com',
-          phoneNumber: '89991231223',
-          amount: 890
-        },
-        {
-          count: 10,
-          name: 'Andrey',
-          address: 'Lenin street',
-          emailAddress: 'exampleSobakasite.com',
-          phoneNumber: '89991231223',
-          amount: 890
-        },
-          {
-          count: 10,
-          name: 'Andrey',
-          address: 'Lenin street',
-          emailAddress: 'exampleSobakasite.com',
-          phoneNumber: '89991231223',
-          amount: 890
-        },
-          {
-          count: 10,
-          name: 'Andrey',
-          address: 'Lenin street',
-          emailAddress: 'exampleSobakasite.com',
-          phoneNumber: '89991231223',
-          amount: 890
-        },
-      ],
+      tableHeader: {},
+      table: [],
     }
   },
   mutations: {
-    increment (state) {
-      state.count++
-    },
-    updateQueryString (state, string) {
+    updateQueryString(state, string) {
       state.searchQuery = string
+    },
+    deleteRow(state, id) {
+      state.table.forEach((row, index) => {
+        if (row.id == id) {
+          state.table.splice(index, 1)
+        }
+      });
+    },
+    updateRow(state, params) {
+      console.log(params)
+      const { id, key, text } = params
+      state.table.forEach( (row) => {
+        if (row.id === id) {
+          row[key] = text
+        }
+      })
+    },
+    uploadDataFromFile(state, data) {
+      state.table = data
+    },
+    updateTableHeader(state, data) {
+      state.tableHeader = data
     }
   }
 })
