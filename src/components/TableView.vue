@@ -23,7 +23,9 @@
           <v-btn color="success" class="mr-4" @click="deleteRow(index)"
             >Delete</v-btn
           >
-          <v-btn color="success" class="mr-4" @click="getQuery">Copy</v-btn>
+          <v-btn color="success" class="mr-4" @click="copyRow(index)"
+            >Copy</v-btn
+          >
         </td>
       </tr>
     </tbody>
@@ -42,9 +44,11 @@ export default {
     deleteRow(id) {
       this.$store.commit("deleteRow", id);
     },
-    updateCell(id, key, text, item) {
-      console.log(item);
-      this.$store.commit("updateRow", { id, key, text });
+    updateCell(idx, key, text) {
+      this.$store.commit("updateRow", { idx, key, text });
+    },
+    copyRow(idx) {
+      this.$store.commit("copyRow", idx);
     },
   },
   computed: {
