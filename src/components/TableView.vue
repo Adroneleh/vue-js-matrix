@@ -1,78 +1,86 @@
 <template>
   <v-table v-if="filteredTable" fixed-header height="75vh">
-    <thead v-on:click="cellClick">
-      <tr>
-        <th class="text-left" v-for="value in tableHeader" :key="value">
+    <thead class="table_header" v-on:click="cellClick">
+      <tr class="table_header__items">
+        <th class="table_header__item" v-for="value in tableHeader" :key="value">
           {{ value }}
+        </th>
+        <th class="table_header__item" v-if="Object.values(tableHeader).length > 0">
+          <v-icon class="table_content__icon" color="#000000" @click="addEmptyRow">mdi-plus-box</v-icon>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, index) in filteredTable" :key="item.name">
-        <td v-for="[key, val] in Object.entries(item)" :key="key">
+      <tr v-for="(item, index) in filteredTable" :key="item.name" class="table_content">
+        <td
+          class="table_content__item"
+          v-for="[key, val] in Object.entries(item)"
+          :key="key"
+        >
           <input
             type="text"
             :value="val"
             :ref="key + index"
-            @change="
-              updateCell(index, key, this.$refs[key + item.id][0].value, item)
-            "
+            @change="updateCell(index, key, this.$refs[key + index][0].value)"
           />
         </td>
-        <td>
-           <v-btn color="success" class="mr-4" @click="deleteRow(index)">Delete</v-btn>
-            <v-btn color="success" class="mr-4" @click="getQuery">Copy</v-btn>
+        <td class="table_content__item">
+          <v-icon class="table_content__icon" color="#808080" @click="copyRow(index)">mdi-content-copy</v-icon>
+          <v-icon class="table_content__icon" color="#FF0000" @click="deleteRow(index)">mdi-delete</v-icon>
         </td>
       </tr>
     </tbody>
   </v-table>
 </template>
 
-<script>
-import * as XLSX from "xlsx";
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import './TableView.scss'
+
+import { TableTypes } from '@/types/table.types'
+
+export default defineComponent({
+  name: 'TableView',
   data() {
     return {
       tableData: this.$store.state.table,
       tableHeader: this.$store.state.tableHeader,
-    };
+    }
   },
-  // watch: {
-  //   '$store.state.table': {
-  //     handler() {
-  //       console.log(this.$store.state.table)
-  //     },
-  //     immediate: true
-  //   }
-  // },
   methods: {
-    deleteRow(id) {
-      this.$store.commit("deleteRow", id);
+    deleteRow(index: number) {
+      this.$store.commit('deleteRow', index)
     },
-    updateCell(id, key, text, item) {
-      console.log(item);
-      this.$store.commit("updateRow", { id, key, text });
+    updateCell(index: number, key: string, value: string) {
+      this.$store.commit('updateRow', { index, key, value })
     },
-    exportFile() {
-      const data = XLSX.utils.json_to_sheet(this.tableData);
-      console.log(data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, data, "data");
-      XLSX.writeFile(wb, "demo.xlsx");
+    copyRow(index: number) {
+      this.$store.commit('copyRow', index)
+    },
+    addEmptyRow() {
+      this.$store.commit('addEmptyRow')
+    },
+  },
+  watch: {
+    '$store.state.tableHeader': {
+      handler() {
+        this.tableHeader = this.$store.state.tableHeader
+      },
+      immediate: true,
     },
   },
   computed: {
     filteredTable() {
-      return this.$store.state.table.filter((row) =>
+      return this.$store.state.table.filter((row: TableTypes) =>
         Object.keys(row).some((key) =>
           row[key]
             .toString()
             .toLowerCase()
             .includes(this.$store.state.searchQuery.toLowerCase())
         )
-      );
+      )
     },
   },
-};
+})
 </script>

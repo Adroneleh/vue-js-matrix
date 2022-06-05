@@ -1,0 +1,47 @@
+@import '@/mixins/mixins.scss';
+
+.header {
+  width: 100%;
+  margin: 0;
+  max-width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__left {
+    max-width: 70%;
+    width: 100%;
+    margin-right: 30px;
+  }
+
+  &__right {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 500px;
+    width: 100%;
+
+    & > * {
+      max-width: 300px;
+    }
+  }
+
+  &__left,
+  &__right {
+    padding: 0;
+  }
+}
+
+#app {
+  .v-table__wrapper {
+    &::-webkit-scrollbar {
+      width: 8px;
+      background-color: gray !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-green-first;
+      border-radius: 100px;
+    }
+  }
+}
