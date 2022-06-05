@@ -1,19 +1,21 @@
 <template>
-  <v-btn color="success" class="mr-4" @click="exportFile">Export</v-btn>
+  <v-btn color="normal" class="mr-4" @click="exportFile">Export</v-btn>
 </template>
 
-<script>
-import * as XLSX from "xlsx";
+<script lang="ts">
+import * as XLSX from 'xlsx'
 
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   data: () => ({}),
   methods: {
     exportFile() {
-      const data = XLSX.utils.json_to_sheet(this.$store.state.table);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, data, "data");
-      XLSX.writeFile(wb, "demo.xlsx");
+      const data: any = XLSX.utils.json_to_sheet(this.$store.state.table)
+      const wb: any = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, data, 'data')
+      XLSX.writeFile(wb, 'file.xlsx')
     },
   },
-};
+})
 </script>
