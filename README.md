@@ -1,5 +1,25 @@
 # vue-js-matrix
 
+## Description
+The project was created to work with Excel spreadsheets.
+
+Capabilities:
+- Upload XLSX file
+- Change table values
+- Add new rows
+- Delete rows
+- Copy rows
+- Export table to XLSX file
+## Project link
+[https://adroneleh.github.io/vue-js-matrix/dist/index.html](https://adroneleh.github.io/vue-js-matrix/dist/index.html)
+
+## Packages used
+
+- Vue
+- Vue-cli
+- xlsx
+- vuetify
+
 ## Project setup
 ```
 npm install
@@ -9,16 +29,9 @@ npm install
 ```
 npm run serve
 ```
+The project starts on port ```8080``` by default
 
 ### Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
