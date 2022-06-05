@@ -11,7 +11,7 @@ Capabilities:
 - Copy rows
 - Export table to XLSX file
 ## Project link
-[https://adroneleh.github.io/vue-js-matrix/dist/index.html](https://adroneleh.github.io/vue-js-matrix/dist/index.html)
+[demo](https://adroneleh.github.io/vue-js-matrix/dist/index.html)
 
 ## Packages used
 
